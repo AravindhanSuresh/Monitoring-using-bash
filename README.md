@@ -32,3 +32,27 @@ Copy paste the CpuAlert.sh files from this repo and replace your desired destina
 sh -x CpuAlert.sh
 
 Now , whenever the file is executed, it will check the CPU usage and if it exceeds more than 80, it will send the top 5 process to the destination mail through SMTP.
+
+
+Now, we have to enable CRONTAB for sheduling to run the command for every 1 minute.
+
+crontab -e
+
+*/1 * * * * /bin/bash /home/ubuntu/SCRIPTS/CpuAlert.sh
+
+#Now , we have to do the stress testing for find out it actually works. 
+
+It can be done by using this cmd.
+
+dd if=/dev/zero of=/dev/null
+
+/dev/zero provides an endless stream of zero bytes when read. This function is provided by the kernel and does not require allocating memory. All writes to /dev/null are dropped silently.
+As a result, when you perform the dd, the system generates 500 megabytes in zero bytes that simply get discarded. Except for a temporary buffer, no data are stored before, during, or after this operation.
+The speed of the transfer from /dev/zero to /dev/null is determined primarily by the speed of your processor and relevant system calls. (In your case, the buffer is 500 MB large, and hence the operation tests the speed of your memory as well.)
+
+
+So the CPU will be near 99.99 %.
+
+The mail will be sent from the machine to the destination machine.
+
+
