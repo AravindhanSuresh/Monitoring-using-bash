@@ -3,7 +3,7 @@ cpuuse=`sar -P ALL 1 2 |grep 'Average.*all' |awk -F" " '{print 100.0 -$NF}'`
 if [ "$cpuuse" -ge 80 ]; then
 SUBJECT="ATTENTION: CPU load is high on $(hostname) at $(date)"
 MESSAGE="/tmp/Mail.out"
-TO="s.aravidhan48@gmail.com"
+TO="Destination@MailID"
   echo "CPU current usage is: $cpuuse%" >> $MESSAGE
   echo "" >> $MESSAGE
   echo "+------------------------------------------------------------------+" >> $MESSAGE
@@ -13,11 +13,3 @@ TO="s.aravidhan48@gmail.com"
   mail -s "$SUBJECT" "$TO" < $MESSAGE
   rm /tmp/Mail.out
   fi
-
-
-# ------------------------------------------------------------------------
-  # <!-- echo "+------------------------------------------------------------------+" >> $MESSAGE -->
-  # <!-- echo "Top 20 processes which consuming high CPU" >> $MESSAGE -->
-  # <!-- echo "+------------------------------------------------------------------+" >> $MESSAGE -->
-  # <!-- echo "$(top -bn1 | head -20)" >> $MESSAGE -->
-  # <!-- echo "" >> $MESSAGE -->
